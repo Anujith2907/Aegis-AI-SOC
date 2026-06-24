@@ -1,0 +1,395 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   AEGISAI SOC — THEME: Electric Blue / Deep Black
+   Fonts: Exo 2 (display) · Space Grotesk (body) · Fira Code (mono)
+───────────────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/* ──── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  --neon-blue:     #3b82f6;
+  --electric-blue: #60a5fa;
+  --deep-blue:     #2563eb;
+  --cyan:          #06b6d4;
+  --indigo:        #6366f1;
+  --void:          #020617;
+  --abyss:         #0a0f1e;
+  --surface:       #0f172a;
+  --surface-2:     #1e293b;
+  --border:        rgba(59,130,246,0.15);
+  --text-primary:  #f1f5f9;
+  --text-secondary:#94a3b8;
+  --text-muted:    #475569;
+  --safe:          #10b981;
+  --threat-red:    #ef4444;
+  --warning:       #f59e0b;
+}
+
+/* ──── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background-color: var(--void);
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ──── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-blue), var(--indigo));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--electric-blue); }
+
+/* ──── Background grid ───────────────────────────────────────────────────── */
+.cyber-grid-bg {
+  background-color: var(--void);
+  background-image:
+    linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ──── Glass card ────────────────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(59,130,246,0.06);
+}
+.glass-card-purple {
+  background: rgba(15, 15, 40, 0.8);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(99,102,241,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.glass-card-red {
+  background: rgba(30, 10, 15, 0.85);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(239,68,68,0.3);
+  box-shadow: 0 8px 32px rgba(239,68,68,0.08);
+}
+
+/* ──── Neon text ─────────────────────────────────────────────────────────── */
+.neon-text-blue {
+  color: var(--neon-blue);
+  text-shadow: 0 0 12px rgba(59,130,246,0.7), 0 0 30px rgba(59,130,246,0.3);
+}
+.neon-text-purple {
+  color: var(--indigo);
+  text-shadow: 0 0 12px rgba(99,102,241,0.7), 0 0 30px rgba(99,102,241,0.3);
+}
+.neon-text-green {
+  color: var(--safe);
+  text-shadow: 0 0 12px rgba(16,185,129,0.7), 0 0 30px rgba(16,185,129,0.3);
+}
+.neon-text-red {
+  color: var(--threat-red);
+  text-shadow: 0 0 12px rgba(239,68,68,0.7), 0 0 30px rgba(239,68,68,0.3);
+}
+
+/* Shorthand aliases */
+.text-neon-blue   { color: var(--neon-blue); }
+.text-cyber-green { color: var(--safe); }
+.text-threat-red  { color: var(--threat-red); }
+.text-cyber-bg    { color: var(--void); }
+.bg-cyber-green   { background-color: var(--safe); }
+.bg-threat-red    { background-color: var(--threat-red); }
+
+/* ──── Neon borders ──────────────────────────────────────────────────────── */
+.neon-border-blue  { border-color: var(--neon-blue); box-shadow: 0 0 14px rgba(59,130,246,0.4), inset 0 0 14px rgba(59,130,246,0.04); }
+.neon-border-purple{ border-color: var(--indigo);    box-shadow: 0 0 14px rgba(99,102,241,0.4); }
+.neon-border-red   { border-color: var(--threat-red);box-shadow: 0 0 14px rgba(239,68,68,0.5); }
+.neon-border-green { border-color: var(--safe);      box-shadow: 0 0 14px rgba(16,185,129,0.4); }
+
+/* ──── Buttons ───────────────────────────────────────────────────────────── */
+.btn-cyber {
+  @apply relative overflow-hidden px-6 py-3 font-semibold text-sm uppercase tracking-widest transition-all duration-300;
+  font-family: 'Exo 2', sans-serif;
+  background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(99,102,241,0.12));
+  border: 1px solid rgba(59,130,246,0.45);
+  color: var(--neon-blue);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.btn-cyber:hover {
+  background: linear-gradient(135deg, rgba(59,130,246,0.28), rgba(99,102,241,0.25));
+  box-shadow: 0 0 24px rgba(59,130,246,0.45);
+  color: #fff;
+}
+.btn-cyber::before {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.2), transparent);
+  transition: left 0.5s;
+}
+.btn-cyber:hover::before { left: 100%; }
+
+.btn-cyber-solid {
+  @apply relative overflow-hidden px-6 py-3 font-bold text-sm uppercase tracking-widest transition-all duration-300;
+  font-family: 'Exo 2', sans-serif;
+  background: linear-gradient(135deg, var(--neon-blue), var(--indigo));
+  color: #fff;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.btn-cyber-solid:hover {
+  box-shadow: 0 0 36px rgba(59,130,246,0.6);
+  transform: translateY(-1px);
+}
+
+.btn-threat {
+  @apply px-6 py-3 font-semibold text-sm uppercase tracking-widest transition-all duration-300;
+  font-family: 'Exo 2', sans-serif;
+  background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(249,115,22,0.12));
+  border: 1px solid rgba(239,68,68,0.45);
+  color: var(--threat-red);
+}
+.btn-threat:hover {
+  background: linear-gradient(135deg, rgba(239,68,68,0.28), rgba(249,115,22,0.28));
+  box-shadow: 0 0 24px rgba(239,68,68,0.4);
+}
+
+/* ──── Holo panel ────────────────────────────────────────────────────────── */
+.holo-panel {
+  position: relative;
+  background: linear-gradient(135deg, rgba(59,130,246,0.03), rgba(99,102,241,0.03));
+  border: 1px solid rgba(59,130,246,0.2);
+}
+.holo-panel::before {
+  content: '';
+  position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
+  background: linear-gradient(90deg, var(--neon-blue), var(--indigo), var(--cyan), var(--neon-blue));
+  background-size: 300%;
+  opacity: 0.3; z-index: -1;
+  animation: borderFlow 4s linear infinite;
+  border-radius: inherit;
+}
+
+/* ──── Status badges ─────────────────────────────────────────────────────── */
+.badge-critical {
+  @apply inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded;
+  background: rgba(239,68,68,0.18); color: #ef4444; border: 1px solid rgba(239,68,68,0.4);
+}
+.badge-high {
+  background: rgba(249,115,22,0.18); color: #f97316; border: 1px solid rgba(249,115,22,0.4);
+}
+.badge-medium {
+  background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.4);
+}
+.badge-low {
+  background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.4);
+}
+.badge-normal {
+  background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.4);
+}
+
+/* ──── Cyber input ───────────────────────────────────────────────────────── */
+.cyber-input {
+  @apply w-full px-4 py-3 text-sm transition-all duration-300;
+  font-family: 'Fira Code', monospace;
+  background: rgba(2,6,23,0.85);
+  border: 1px solid rgba(59,130,246,0.2);
+  color: var(--text-primary);
+  outline: none;
+}
+.cyber-input:focus {
+  border-color: rgba(59,130,246,0.6);
+  box-shadow: 0 0 16px rgba(59,130,246,0.2);
+}
+.cyber-input::placeholder { color: rgba(148,163,184,0.35); font-family: 'Fira Code', monospace; }
+
+/* ──── Progress bar ──────────────────────────────────────────────────────── */
+.cyber-progress {
+  background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2);
+  height: 6px; border-radius: 3px; overflow: hidden;
+}
+.cyber-progress-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--neon-blue), var(--indigo));
+  transition: width 0.8s ease;
+}
+
+/* ──── Scan line ─────────────────────────────────────────────────────────── */
+.scan-overlay {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.6), transparent);
+  animation: scanLine 8s linear infinite;
+  pointer-events: none; z-index: 9999;
+}
+
+/* ──── Sidebar ───────────────────────────────────────────────────────────── */
+.sidebar-item {
+  @apply flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 relative;
+  color: rgba(148,163,184,0.6);
+  border-left: 2px solid transparent;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.sidebar-item:hover {
+  color: var(--neon-blue);
+  background: rgba(59,130,246,0.06);
+  border-left-color: rgba(59,130,246,0.4);
+}
+.sidebar-item.active {
+  color: var(--neon-blue);
+  background: rgba(59,130,246,0.1);
+  border-left-color: var(--neon-blue);
+}
+.sidebar-item.active::after {
+  content: '';
+  position: absolute; right: 0; top: 0;
+  height: 100%; width: 1px;
+  background: linear-gradient(180deg, transparent, var(--neon-blue), transparent);
+}
+
+/* ──── Incident card ─────────────────────────────────────────────────────── */
+.incident-card {
+  @apply p-4 rounded cursor-pointer transition-all duration-300;
+  border-left: 3px solid transparent;
+  background: rgba(15,23,42,0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59,130,246,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.incident-card:hover {
+  transform: translateX(3px);
+  border-left-color: var(--neon-blue);
+  box-shadow: 0 0 20px rgba(59,130,246,0.12);
+}
+.incident-card.critical { border-left-color: #ef4444; }
+.incident-card.high     { border-left-color: #f97316; }
+.incident-card.medium   { border-left-color: #f59e0b; }
+.incident-card.low      { border-left-color: #10b981; }
+
+/* ──── Font shortcuts ────────────────────────────────────────────────────── */
+.font-rajdhani  { font-family: 'Space Grotesk', sans-serif; }
+.font-orbitron  { font-family: 'Exo 2', sans-serif; }
+.font-display   { font-family: 'Orbitron', 'Exo 2', sans-serif; }
+.font-mono-cyber{ font-family: 'Fira Code', monospace; }
+
+/* ──── Response workflow ─────────────────────────────────────────────────── */
+.workflow-step { @apply relative flex flex-col items-center; }
+.workflow-step-circle {
+  @apply w-16 h-16 rounded-full flex items-center justify-center z-10;
+  border: 2px solid rgba(59,130,246,0.3);
+  background: rgba(2,6,23,0.9); transition: all 0.5s;
+}
+.workflow-step-circle.active {
+  border-color: var(--safe);
+  box-shadow: 0 0 28px rgba(16,185,129,0.5);
+  background: rgba(16,185,129,0.1);
+}
+.workflow-step-circle.pending {
+  border-color: #f59e0b;
+  box-shadow: 0 0 18px rgba(245,158,11,0.4);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ──── Radar pulse ───────────────────────────────────────────────────────── */
+.radar-ring {
+  border-radius: 50%;
+  border: 1px solid rgba(59,130,246,0.3);
+  animation: radarPulse 3s ease-out infinite;
+}
+@keyframes radarPulse {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* ──── Typing cursor ─────────────────────────────────────────────────────── */
+.typing-cursor::after {
+  content: '|'; animation: blink 1s step-end infinite; color: var(--neon-blue);
+}
+@keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+
+/* ──── Chat bubbles ──────────────────────────────────────────────────────── */
+.chat-message-user {
+  @apply ml-auto max-w-xs px-4 py-3 rounded text-sm;
+  background: linear-gradient(135deg, rgba(59,130,246,0.14), rgba(99,102,241,0.14));
+  border: 1px solid rgba(59,130,246,0.3);
+}
+.chat-message-ai {
+  @apply mr-auto max-w-md px-4 py-3 rounded text-sm;
+  background: rgba(15,23,42,0.85);
+  border: 1px solid rgba(59,130,246,0.14);
+}
+
+/* ──── Table ─────────────────────────────────────────────────────────────── */
+.cyber-table { @apply w-full text-sm; border-collapse: separate; border-spacing: 0; }
+.cyber-table thead tr { background: rgba(59,130,246,0.06); border-bottom: 1px solid rgba(59,130,246,0.2); }
+.cyber-table thead th {
+  @apply px-4 py-3 text-left font-semibold uppercase tracking-wider text-xs;
+  font-family: 'Exo 2', sans-serif;
+  color: rgba(59,130,246,0.85);
+}
+.cyber-table tbody tr { border-bottom: 1px solid rgba(59,130,246,0.06); transition: background 0.2s; }
+.cyber-table tbody tr:hover { background: rgba(59,130,246,0.04); }
+.cyber-table tbody td { @apply px-4 py-3; color: rgba(241,245,249,0.85); }
+
+/* ──── Severity text helpers ─────────────────────────────────────────────── */
+.severity-critical { color: #ef4444; }
+.severity-high     { color: #f97316; }
+.severity-medium   { color: #f59e0b; }
+.severity-low      { color: #10b981; }
+
+/* ──── Gradient border ───────────────────────────────────────────────────── */
+.gradient-border { position: relative; }
+.gradient-border::before {
+  content: ''; position: absolute; inset: -1px;
+  background: linear-gradient(45deg, var(--neon-blue), var(--indigo), var(--cyan), var(--neon-blue));
+  background-size: 300%; animation: shimmer 3s linear infinite;
+  border-radius: inherit; z-index: -1;
+}
+
+/* ──── Corner decorations ────────────────────────────────────────────────── */
+.corner-tl::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 20px; height: 20px;
+  border-top: 2px solid var(--neon-blue); border-left: 2px solid var(--neon-blue);
+}
+.corner-br::after {
+  content: ''; position: absolute; bottom: 0; right: 0;
+  width: 20px; height: 20px;
+  border-bottom: 2px solid var(--neon-blue); border-right: 2px solid var(--neon-blue);
+}
+
+/* ──── Section divider ───────────────────────────────────────────────────── */
+.cyber-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.45), rgba(99,102,241,0.45), transparent);
+}
+
+/* ──── Animated recharts tooltip ─────────────────────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(15,23,42,0.96) !important;
+  border: 1px solid rgba(59,130,246,0.3) !important;
+  border-radius: 6px !important;
+}
+
+/* ──── Keyframes ─────────────────────────────────────────────────────────── */
+@keyframes borderFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes scanLine {
+  0%   { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
