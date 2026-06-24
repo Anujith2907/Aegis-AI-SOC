@@ -78,21 +78,6 @@ async def login(credentials: UserLogin):
     db = get_db()
     users_col = db["users"]
     
-    # Check default root/admin logins for easy sandbox presentations!
-    if credentials.email == "admin@cyberguard.ai" and credentials.password == "admin123":
-        user_payload = {
-            "id": "admin-id",
-            "name": "Super Admin",
-            "email": "admin@cyberguard.ai",
-            "role": "admin"
-        }
-        access_token = create_access_token(data={"sub": credentials.email})
-        return {
-            "access_token": access_token,
-            "token_type": "bearer",
-            "user": user_payload
-        }
-        
     user = await users_col.find_one({"email": credentials.email})
     if not user or not verify_password(credentials.password, user["password"]):
         raise HTTPException(

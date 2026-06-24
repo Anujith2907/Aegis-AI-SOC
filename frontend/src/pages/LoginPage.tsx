@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shield, Eye, EyeOff, Loader2, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuthStore } from '../store';
+import { authAPI } from '../api';
 
 export function LoginPage() {
-  const [email, setEmail] = useState('admin@aegisai.soc');
-  const [password, setPassword] = useState('AegisAI2024!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -18,12 +19,20 @@ export function LoginPage() {
     setError('');
     if (!email || !password) { setError('Please fill in all fields.'); return; }
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    login(
-      { id: '1', email, name: 'Security Admin', role: 'admin', createdAt: new Date().toISOString() },
-      'mock-jwt-token-admin'
-    );
-    navigate('/dashboard');
+    try {
+      const res = await authAPI.login(email, password);
+      const { access_token, user } = res.data;
+      login(
+        { id: user.id, email: user.email, name: user.name, role: user.role, createdAt: new Date().toISOString() },
+        access_token
+      );
+      navigate('/dashboard');
+    } catch (err: any) {
+      const msg = err.response?.data?.detail || 'Login failed. Please check your credentials.';
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -156,17 +165,7 @@ export function LoginPage() {
           </form>
         </motion.div>
 
-        {/* Demo hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mt-4 text-center"
-        >
-          <p className="text-xs text-slate-600 font-mono-cyber">
-            Demo credentials pre-filled — click <span className="text-neon-blue">Access Dashboard</span>
-          </p>
-        </motion.div>
+
       </div>
     </div>
   );
