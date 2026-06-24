@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -90,6 +90,12 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const { sidebarOpen, toggleSidebar } = useAppStore();
   const navigate = useNavigate();
   const [notifications] = useState(5);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -207,7 +213,8 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <span className="font-mono-cyber text-xs text-cyber-green">SYSTEM SECURE</span>
             </div>
             <div className="font-mono-cyber text-xs text-slate-600">
-              {new Date().toLocaleString('en-US', { timeZone: 'UTC' })} UTC
+              {currentTime.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}{' '}
+              <span className="text-slate-400">{currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</span>
             </div>
           </div>
           <div className="flex items-center gap-3">
