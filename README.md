@@ -1,4 +1,4 @@
-# CyberGuard AI – Autonomous Network Incident Investigation & Response System
+# Aegis AI Soc  – Autonomous Network Incident Investigation & Response System
 
 ## Overview
 An enterprise-grade AI cybersecurity platform that detects cyber threats, predicts incident severity, explains root causes, retrieves similar incidents, generates AI-powered reports, and automates security responses. It features a futuristic 3D Security Operations Center (SOC) interface.
